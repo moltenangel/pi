@@ -50,15 +50,16 @@ def main():
     if mode == 1:
         randblink()
 
-    def randblink():
-        nonlocal speed
-        red = rdm.randrange(0, 100, 1)
-        green = rdm.randrange(0, 100, 1)
-        blue = rdm.randrange(0, 100, 1)
-        led2(red/100,green/100,blue/100)
-        sleep(speed)
-        led2(0,0,0)
-        sleep(speed)
+
+def randblink():
+    nonlocal speed
+    red = rdm.randrange(0, 100, 1)
+    green = rdm.randrange(0, 100, 1)
+    blue = rdm.randrange(0, 100, 1)
+    led2(red/100,green/100,blue/100)
+    sleep(speed)
+    led2(0,0,0)
+    sleep(speed)
 
 
 if __name__ == '__main__':
