@@ -42,12 +42,16 @@ def main():
     red = 1
     green = 1
     blue = 1
-    speed = .25
-    blink = True
+    speed = .03
+    mode = 1
 
+    # blink = True
     # red.blink()
+    if mode == 1:
+        randblink()
 
-    while True:
+    def randblink():
+        nonlocal speed
         red = rdm.randrange(0, 100, 1)
         green = rdm.randrange(0, 100, 1)
         blue = rdm.randrange(0, 100, 1)
@@ -55,8 +59,6 @@ def main():
         sleep(speed)
         led2(0,0,0)
         sleep(speed)
-   
-   return
 
 
 if __name__ == '__main__':
