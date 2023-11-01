@@ -12,28 +12,8 @@ import random as rdm
 led = RGBLED(red=17, green=27, blue=22)
 
 
-def led2(x, y, z):
+def led1(x, y, z):
     led.color = (x, y, z)
-
-
-def led1():  # first iteration of code for historic purposes
-    while True:
-        red.on()
-        sleep(speed)
-        red.off()
-        sleep(speed)
-
-        green.value = 0.125
-        green.on()
-        sleep(speed)
-        green.off()
-        sleep(speed)
-
-        blue.value = 0.5
-        blue.on()
-        sleep(speed)
-        blue.off()
-        sleep(speed)
 
 
 def main():
@@ -44,22 +24,23 @@ def main():
     blue = 1
     speed = .03
     mode = 1
-
-    # blink = True
-    # red.blink()
-    if mode == 1:
-        randblink()
+    maxspeed = 50
 
 
-    def randblink():
-        nonlocal speed
-        red = rdm.randrange(0, 100, 1)
-        green = rdm.randrange(0, 100, 1)
-        blue = rdm.randrange(0, 100, 1)
-        led2(red / 100, green / 100, blue / 100)
+    def blink():
+        red = rdm.randrange(0, 100, 1) / 100
+        green = rdm.randrange(0, 100, 1) / 100
+        blue = rdm.randrange(0, 100, 1) / 100
+        speed = rdm.randrange(0, maxspeed, 1) / 100
+        blinkrate = rdm.randrange(0, 100, 1) / 100
+        led1(red, green, blue)
         sleep(speed)
-        led2(0,0,0)
-        sleep(speed)
+        if blinkrate >= .50:
+            led1(0,0,0)
+            sleep(speed)
+
+    while True:
+        blink()
 
 
 if __name__ == '__main__':
