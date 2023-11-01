@@ -6,48 +6,58 @@
 # from gpiozero import LED
 from gpiozero import RGBLED
 from time import sleep
+import random as rdm
 
-red = LED(17)
-green = LED(27)
-blue = LED(22)
+# Initialize GPIO Board values
 led = RGBLED(red=17, green=27, blue=22)
-sleeptime = .25
 
 
-def ledtest(x, y, z):
+def led2(x, y, z):
     led.color = (x, y, z)
 
 
-def ledblink():
+def led1():  # first iteration of code for historic purposes
     while True:
         red.on()
-        sleep(sleeptime)
+        sleep(speed)
         red.off()
-        sleep(sleeptime)
+        sleep(speed)
 
         green.value = 0.125
         green.on()
-        sleep(sleeptime)
+        sleep(speed)
         green.off()
-        sleep(sleeptime)
+        sleep(speed)
 
         blue.value = 0.5
         blue.on()
-        sleep(sleeptime)
+        sleep(speed)
         blue.off()
-        sleep(sleeptime)
+        sleep(speed)
 
 
-# red.blink()
+def main():
+    print("Hello World!")
+    print("Round One, Fight!")
+    red = 1
+    green = 1
+    blue = 1
+    speed = .25
+    blink = True
 
-print("Hello World!")
+    # red.blink()
 
-print("Round One, Fight!")
+    while True:
+        red = rdm.randrange(0, 1, .01)
+        green = rdm.randrange(0, 1, .01)
+        blue = rdm.randrange(0, 1, .01)
+        led2(red,green,blue)
+        sleep(speed)
+        led2(0,0,0)
+        sleep(speed)
+   
+   return
 
 
 if __name__ == '__main__':
-    while True:
-        ledtest(0,0,0)
-        sleep(sleeptime)
-        ledtest(1,1,1)
-        sleep(sleeptime)
+    main()
