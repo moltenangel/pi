@@ -15,10 +15,11 @@ import random as rdm
 # Initialize GPIO Board values
 totalsteps = 90  # default = 360
 # led = RGBLED(red=17, green=27, blue=22, active_high=False)
-rotor = RotaryEncoder(24, 18, wrap=True, maxsteps=totalsteps/2)
+#rotor = RotaryEncoder(24, 18, wrap=True, maxsteps=totalsteps/2)
+rotor = RotaryEncoder(24, 18, wrap=True,)  #  maxsteps=totalsteps/2
 rotor.steps = -(totalsteps/2)  # -180
 btn = Button(23)  # btn = Button(23, pull_up=False)
-
+done = Event()
 
 def main():
     print("Hello World!")
