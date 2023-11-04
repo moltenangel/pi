@@ -14,11 +14,12 @@ import random as rdm
 
 # Initialize GPIO Board values
 totalsteps = 90  # default = 360
-rotor.steps = -(totalsteps/2)  # -180
 rotor = RotaryEncoder(24, 18, wrap=True)  #  maxsteps=totalsteps/2
+rotor.steps = -(totalsteps/2)  # -180
 led = RGBLED(red=17, green=27, blue=22, active_high=False)
 btn = Button(23)  # pull_up=False)
 done = Event()
+
 
 def main():
     print("Raspberry Pi device")
@@ -30,8 +31,8 @@ def main():
 
     def change_mode():
         global totalsteps
-        nonlocal modenon
-        local hue
+        nonlocal mode
+        nonlocal hue
 
         mode += 1
         print(f'mode={mode}')
@@ -60,34 +61,34 @@ def main():
             led.color = (0,0,0)
             sleep(speed)
 
-        def change_hue():
-            # Scale the rotor steps (-180..180) to 0..1
-            print(f'rotor.steps={rotor.steps}' | print(f,'totalsteps={totalsteps}'))
-            nonlocal hue
-            hue = (rotor.steps + totalsteps/2) / totalsteps
-            if led.is_lit == True:
-                led.color = Color(h=hue, s=1, v=1)
+    def change_hue():
+        # Scale the rotor steps (-180..180) to 0..1
+        print(f'rotor.steps={rotor.steps}' | print(f,'totalsteps={totalsteps}'))
+        nonlocal hue
+        hue = (rotor.steps + totalsteps/2) / totalsteps
+        if led.is_lit == True:
+            led.color = Color(h=hue, s=1, v=1)
 
-        def show_color():
-            print(f'Hue {led.color.hue.deg:.1f} degrees = {led.color.html}')
+    def show_color():
+        print(f'Hue {led.color.hue.deg:.1f} degrees = {led.color.html}')
 #            change_mode()
 
-        def stop_script():
-            print('Exiting')
-            done.set()
+    def stop_script():
+        print('Exiting')
+        done.set()
 
-        print('Select a color by turning the knob')
-        print('Select a color by turning the knob')
-        print('Hold the button to exit')
-        print('Goodbye...')
+    print('Select a color by turning the knob')
+    print('Select a color by turning the knob')
+    print('Hold the button to exit')
+    print('Goodbye...')
 
-        # Event Handler
-        rotor.when_rotated = change_hue
-        btn.when_pressed = show_color  # led_toggle
-        btn.when_released = change_mode  # show_color
-        btn.when_held = led.toggle  # stop_script
-        done.wait()
-        print('Goodbye...')
+    # Event Handler
+    rotor.when_rotated = change_hue
+    btn.when_pressed = show_color  # led_toggle
+    btn.when_released = change_mode  # show_color
+    btn.when_held = led.toggle  # stop_script
+    done.wait()
+    print('Goodbye...')
 
 
 if __name__ == '__main__':
